@@ -52,6 +52,7 @@ defmodule QilianPhoenix.Web do
       import QilianPhoenix.Router.Helpers
       import QilianPhoenix.ErrorHelpers
       import QilianPhoenix.Gettext
+      import QilianPhoenix.Session, only: [current_user: 1, logged_in?: 1]
     end
   end
 
