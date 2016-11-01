@@ -3,7 +3,7 @@ defmodule QilianPhoenix.SessionController do
   alias QilianPhoenix.Session
 
   def new(conn, _params) do
-    if Session.logged_in?(conn) do
+    if conn.assigns.current_user do
       conn
       |> put_flash(:info, "Your already logged in")
       |> redirect(to: "/")
@@ -16,7 +16,7 @@ defmodule QilianPhoenix.SessionController do
   case Session.login(session_params, QilianPhoenix.Repo) do
     {:ok, user} ->
       conn
-      |> put_session(:current_user, user.id)
+      |> put_session(:user_id, user.id)
       |> put_flash(:info, "Logged in")
       |> redirect(to: "/")
     :error ->
@@ -28,7 +28,7 @@ defmodule QilianPhoenix.SessionController do
 
   def delete(conn, _) do
     conn
-    |> delete_session(:current_user)
+    |> delete_session(:user_id)
     |> put_flash(:info, "Logged out")
     |> redirect(to: "/")
   end

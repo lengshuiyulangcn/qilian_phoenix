@@ -7,6 +7,7 @@ defmodule QilianPhoenix.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug QilianPhoenix.Auth, repo: QilianPhoenix.Repo
   end
 
   pipeline :api do
@@ -18,6 +19,7 @@ defmodule QilianPhoenix.Router do
 
     get "/", PageController, :index
     resources "/users", UsersController, only: [:new, :create]
+    resources "/videos", VideoController
     get    "/login",  SessionController, :new
     post   "/login",  SessionController, :create
     delete "/logout", SessionController, :delete

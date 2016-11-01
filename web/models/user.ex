@@ -7,6 +7,7 @@ defmodule QilianPhoenix.User do
     field :email, :string
     field :password, :string, virtual: true
     field :password_hash, :string
+    has_many :videos, QilianPhoenix.Video
 
     timestamps()
   end

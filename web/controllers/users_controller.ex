@@ -5,7 +5,7 @@ defmodule QilianPhoenix.UsersController do
   alias QilianPhoenix.Session
 
   def new(conn, _params) do
-    if Session.logged_in?(conn) do
+    if conn.assigns.current_user do
       conn
       |> put_flash(:info, "Your already logged in")
       |> redirect(to: "/")
@@ -20,7 +20,7 @@ defmodule QilianPhoenix.UsersController do
     case Repo.insert(changeset) do
        {:ok, _user} ->
         conn
-        |> put_session(:current_user, changeset.id)
+        |> put_session(:user_id, changeset.id)
         |> put_flash(:info, "Your account was created")
         |> redirect(to: "/")
       {:error, changeset} ->
