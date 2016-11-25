@@ -7,15 +7,20 @@ defmodule QilianPhoenix.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug QilianPhoenix.Auth, repo: QilianPhoenix.Repo
   end
 
   pipeline :api do
     plug :accepts, ["json"]
   end
 
+  pipeline :browser_auth do  
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+    plug QilianPhoenix.Auth
+  end
+
   scope "/", QilianPhoenix do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser, :browser_auth] # Use the default browser stack
 
     get "/", PageController, :index
     resources "/users", UsersController, only: [:new, :create]
@@ -23,6 +28,12 @@ defmodule QilianPhoenix.Router do
     get    "/login",  SessionController, :new
     post   "/login",  SessionController, :create
     delete "/logout", SessionController, :delete
+    scope "/auth" do
+      pipe_through :browser
+
+      get "/:provider", SessionController, :request
+      get "/:provider/callback", SessionController, :callback
+    end
   end
 
   # Other scopes may use custom stacks.

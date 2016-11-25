@@ -1,6 +1,5 @@
 defmodule QilianPhoenix.VideoController do
   use QilianPhoenix.Web, :controller
-
   alias QilianPhoenix.Video
 
   def index(conn, _params, user) do

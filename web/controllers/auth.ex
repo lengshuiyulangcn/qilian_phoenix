@@ -2,12 +2,11 @@ defmodule QilianPhoenix.Auth do
     import Plug.Conn
   
     def init(opts) do
-      Keyword.fetch!(opts, :repo)
+      {}
     end
   
-    def call(conn, repo) do
-      user_id = get_session(conn, :user_id)
-      user    = user_id && repo.get(QilianPhoenix.User, user_id)
+    def call(conn, {}) do
+      user = Guardian.Plug.current_resource(conn)
       assign(conn, :current_user, user)
     end
 end

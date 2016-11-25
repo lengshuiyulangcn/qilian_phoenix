@@ -1,6 +1,8 @@
 defmodule QilianPhoenix.User do
   use QilianPhoenix.Web, :model
   import Comeonin.Bcrypt
+  alias Ueberauth.Auth
+  alias QilianPhoenix.Repo
 
   schema "users" do
     field :name, :string
@@ -29,6 +31,8 @@ defmodule QilianPhoenix.User do
     |> validate_length(:password, min: 5)
     |> put_change(:password_hash, hashed_password(params["password"]))
   end
+
+
 
   defp hashed_password(password), do: hashpwsalt(password)
 

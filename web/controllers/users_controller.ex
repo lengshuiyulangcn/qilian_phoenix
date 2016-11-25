@@ -18,9 +18,9 @@ defmodule QilianPhoenix.UsersController do
     changeset = User.create_changeset(%User{}, user_params)
 
     case Repo.insert(changeset) do
-       {:ok, _user} ->
+       {:ok, user} ->
         conn
-        |> put_session(:user_id, changeset.id)
+        |> Guardian.Plug.sign_in(user)
         |> put_flash(:info, "Your account was created")
         |> redirect(to: "/")
       {:error, changeset} ->
