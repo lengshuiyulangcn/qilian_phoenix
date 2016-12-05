@@ -42,3 +42,14 @@ config :guardian, Guardian,
   ttl: { 30, :days },
   secret_key: "8luO5+TyuPXOSyOa0oduBuAXB3pXm0Yrpy5qQICF8qm70HO5aH1nBAAN/3a9JE3Y",
   serializer: QilianPhoenix.GuardianSerializer
+
+
+  #config :db_view,
+  # module_name: QilianPhoenix.MyView,
+  #repo: QilianPhoenix.Repo
+
+  # config :phoenix, :template_engines,
+  #exs: Phoenix.Template.DBEngine
+  #
+config :arc,
+  storage: Arc.Storage.Local

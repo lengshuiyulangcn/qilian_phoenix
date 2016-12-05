@@ -19,7 +19,7 @@ defmodule QilianPhoenix.Mixfile do
   def application do
     [mod: {QilianPhoenix, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin, :ueberauth_facebook]]
+                    :phoenix_ecto, :postgrex, :comeonin, :ueberauth_facebook, :arc_ecto]]
   end
 
   # Specifies which paths to compile per environment.
@@ -40,6 +40,7 @@ defmodule QilianPhoenix.Mixfile do
      {:comeonin, "~> 2.5"},
      {:ueberauth_facebook, "~> 0.5"},
      {:guardian, "~> 0.13.0"},
+     {:arc_ecto, "~> 0.5.0-rc1"},
      {:cowboy, "~> 1.0"}]
   end
 

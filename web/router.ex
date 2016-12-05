@@ -23,7 +23,8 @@ defmodule QilianPhoenix.Router do
     pipe_through [:browser, :browser_auth] # Use the default browser stack
 
     get "/", PageController, :index
-    resources "/users", UsersController, only: [:new, :create]
+    resources "/users", UsersController, only: [:new, :create, :edit]
+    post   "/users/upload_avatar",  UsersController, :upload_avatar
     resources "/videos", VideoController
     get    "/login",  SessionController, :new
     post   "/login",  SessionController, :create
@@ -34,6 +35,7 @@ defmodule QilianPhoenix.Router do
       get "/:provider", SessionController, :request
       get "/:provider/callback", SessionController, :callback
     end
+    resources "/my_views", MyViewController
   end
 
   # Other scopes may use custom stacks.

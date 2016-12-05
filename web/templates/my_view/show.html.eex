@@ -1,0 +1,18 @@
+<h2>Show my view</h2>
+
+<ul>
+
+  <li>
+    <strong>Path:</strong>
+    <%= @my_view.path %>
+  </li>
+
+  <li>
+    <strong>Content:</strong>
+    <%= @my_view.content %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: my_view_path(@conn, :edit, @my_view) %>
+<%= link "Back", to: my_view_path(@conn, :index) %>

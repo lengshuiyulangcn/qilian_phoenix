@@ -1,0 +1,28 @@
+<h2>Listing my views</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Path</th>
+      <th>Content</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for my_view <- @my_views do %>
+    <tr>
+      <td><%= my_view.path %></td>
+      <td><%= my_view.content %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: my_view_path(@conn, :show, my_view), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: my_view_path(@conn, :edit, my_view), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: my_view_path(@conn, :delete, my_view), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New my view", to: my_view_path(@conn, :new) %>
